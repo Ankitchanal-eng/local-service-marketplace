@@ -13,3 +13,6 @@ Tech use: React, Node, Express, MongoDB, JWT
 - 🛡️ Protected routes + input validation
 
 ## Tech Stack
+
+## Progress
+- Day 3: Provider listing CRUD backend done.
