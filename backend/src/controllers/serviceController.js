@@ -37,3 +37,53 @@ exports.getCurrentProviderListings = async (req, res) => {
         res.status(500).json({ message: 'Server Error: Could not retrive listings.'})
     }
 };
+
+exports.getPublicServices = async (req, res) => {
+    try {
+        const { city, category } = req.query;
+        let filter = {};
+
+        if (city) {
+            filter.city = { $regex: new RegExp(city, 'i') };
+        }
+
+        if (category) {
+            filter.category = { $regex: new RegExp(category, 'i') };
+        }
+
+        const services = await ServiceListing.find(filter).sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: services.length,
+            data: services,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'server Error' });
+    }
+};
+
+exports.getServiceDetails = async (req, res) => {
+    try {
+        const service = await ServiceListing.findById(req.params.id);
+
+        if(!service) {
+            return res.status(404).json({
+            success: false, 
+            message: `Service not found with id of ${req.params.id}` });
+        }
+
+        res.status(200).json({ success: true, data: service });
+
+    } catch (error) {
+        console.error(error);
+
+        if (error.kind === 'ObjectId') {
+            return res.status(404).json({ success: false, message: 'Invalid service ID format.' });
+        }
+
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};

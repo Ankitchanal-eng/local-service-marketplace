@@ -11,6 +11,10 @@ router.get('/test', authenticateJWT, (req, res) => {
   res.json({ message: 'Protected route OK', user: req.user });
 });
 
+router.route('/').get(serviceController.getPublicServices); 
+
+router.route('/:id').get(serviceController.getServiceDetails);
+
 router.post(
   '/',
   authenticateJWT,
