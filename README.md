@@ -14,5 +14,9 @@ Tech use: React, Node, Express, MongoDB, JWT
 
 ## Tech Stack
 
-## Progress
-- Day 3: Provider listing CRUD backend done.
+## Progress Log
+
+- Day 1–2: Backend auth with JWT (signup, login, role-based middleware)
+- Day 3: Provider service listing model + create/my listings APIs
+- Day 4: Public service listing + filters + details APIs
+- Day 5: Customer browse page (React) wired to /api/services, basic filters and service cards working
