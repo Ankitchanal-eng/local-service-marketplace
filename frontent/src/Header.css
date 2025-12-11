@@ -1,0 +1,16 @@
+.app-header {
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.app-header nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.app-header nav a:hover {
+  text-decoration: underline;
+}
