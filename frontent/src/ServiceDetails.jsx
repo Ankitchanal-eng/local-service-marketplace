@@ -12,10 +12,11 @@ const ServiceDetails = () => {
     useEffect(() => {
         const fetchServiceDetails = async () => {
             setIsLoading(true);
+            setError(null);
             try {
                 // Call the specific backend endpoint for one service
                 const response = await axios.get(`/api/v1/services/${id}`);
-                setService(response.data);
+                setService(response.data.data);
             } catch (err) {
                 setError('Failed to fetch service details. Service might not exist.');
                 console.error(err);

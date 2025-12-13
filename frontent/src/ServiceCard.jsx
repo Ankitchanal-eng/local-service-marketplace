@@ -9,7 +9,7 @@ const ServiceCard = ({ service }) => {
       <p><strong>City:</strong> {service.city}</p>
       <p><strong>Starts From:</strong> ${service.startingPrice}</p>
       {/* Clickable link to details page using the service ID */}
-      <Link to={`/services/${service.id}`}>View Details</Link>
+      <Link to={`/services/${service._id}`}>View Details</Link>
     </div>
   );
 };

@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/browse" element={<BrowseServices />} />
-          <Route path="/services/id:" element={<ServiceDetails />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/create-service" element={<CreateService />} />
 
           <Route path="*" element={<h1>404 page not found</h1>} />
