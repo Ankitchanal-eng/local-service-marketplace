@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import LoadingState from '../components/LoadingState';
+import ErrorState from '../components/ErrorState';
 
 const ServiceDetails = () => {
       // read the id parameter form the url
@@ -76,11 +78,19 @@ const ServiceDetails = () => {
     };
 
     if (isLoading) {
-        return <div>Loading service details...</div>;
+        return <LoadingState />;
     }
 
-    if (error) {
-        return <div>Service not found.</div>;
+     if (error || !service) {
+        // Use the ErrorState component and add the required link back to browse
+        return (
+            <div style={{ padding: '20px' }}>
+                <ErrorState message={error || 'No service data available.'} />
+                <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                    <Link to="/browse">Go back to Browse Services</Link>
+                </div>
+            </div>
+        );
     }
 
     return (

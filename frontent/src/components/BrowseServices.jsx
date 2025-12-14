@@ -3,6 +3,10 @@ import axios from 'axios';
 import ServiceList from './ServiceList';
 import FilterSidebar from './FilterSidebar';
 
+import LoadingState from '../components/LoadingState'; 
+import ErrorState from '../components/ErrorState';       
+import EmptyState from '../components/EmptyState';  
+
 const BrowseServices = () => {
     const [services, setServices] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -38,14 +42,31 @@ const BrowseServices = () => {
         fetchServices(filters);
     }, [filters]); // Dependency array: runs again when 'filters' state object changes
 
+        const renderContent = () => {
+        if (isLoading) {
+            return <LoadingState />;
+        }
+        if (error) {
+            return <ErrorState message={error} />;
+        }
+        if (services.length === 0) {
+            // Check current filters to provide more specific empty messaging
+            const filterApplied = filters.city || filters.category;
+            const message = filterApplied 
+                ? "No services found matching the selected filters." 
+                : "No services available right now.";
+            return <EmptyState message={message} />;
+        }
+        // Default success state: show the list
+        return <ServiceList services={services} />;
+    };
+
     return (
         <div style={{ display: 'flex' }}>
             <FilterSidebar onFilterChange={handleFilterChange} />
             <div style={{ flexGrow: 1, padding: '20px' }}>
                 <h1>Available Services</h1>
-                {isLoading && <p>Loading services...</p>}
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                {!isLoading && !error && <ServiceList services={services} />}
+                {renderContent()}
             </div>
         </div>
     );

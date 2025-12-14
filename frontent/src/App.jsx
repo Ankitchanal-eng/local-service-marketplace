@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import BrowseServices from './components/BrowseServices';
 import ServiceDetails from './pages/ServiceDetails';
 import CreateService from './components/CreateService';
+import NotFoundPage from './pages/NotFoundPage';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/browse" element={<BrowseServices />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/create-service" element={<CreateService />} />
+          <Route path="*" element={<NotFoundPage />} />
 
           <Route path="*" element={<h1>404 page not found</h1>} />
         </Routes>
