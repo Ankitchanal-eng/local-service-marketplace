@@ -6,7 +6,7 @@ const Home = () => {
         <div>
             <h1>Welcome to the Service Platform</h1>
             <p>This is the homepage.</p>
-            <Link to="/browser">View All Services</Link>
+            <Link to="/browse">View All Services</Link>
         </div>
     );
 };

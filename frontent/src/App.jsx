@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Header from './Header';
-import Home from './Home';
-import BrowseServices from './BrowseServices';
-import ServiceDetails from './ServiceDetails';
-import CreateService from './CreateService';
+import Header from './components/Header/Header';
+import Home from './pages/Home';
+import BrowseServices from './components/BrowseServices';
+import ServiceDetails from './pages/ServiceDetails';
+import CreateService from './components/CreateService';
 
 import './App.css';
-import './Header.css'
 
 function App() {
   return (

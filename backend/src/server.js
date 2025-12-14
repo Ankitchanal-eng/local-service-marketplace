@@ -4,6 +4,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoute');
+const bookingRoutes = require('./routes/bookingRoute');
 const connectDB = require('./config/db');
 const User = require('./models/user');
 const app = express(); 
@@ -20,6 +21,7 @@ connectDB();
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
 
 app.listen(PORT, () => {
     console.log(`The server is running on port ${PORT}`);
