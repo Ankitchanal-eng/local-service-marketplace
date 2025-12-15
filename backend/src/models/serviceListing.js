@@ -14,7 +14,7 @@ const serviceSchema = new mongoose.Schema({
         required: [true, 'description is required'],
         trim: true,
         minLength: 15,
-        maxLenght: 50
+        maxLenght: 500
     },
 
     category: {
@@ -33,7 +33,8 @@ const serviceSchema = new mongoose.Schema({
     },
 
     ownerId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     }, 
 
@@ -41,5 +42,5 @@ const serviceSchema = new mongoose.Schema({
     timestamps: true    // mongoose handle createdAt and updatedAt automatically 
 });
 
-const service = mongoose.model('Service', serviceSchema)
-module.exports = service;
+const serviceListing = mongoose.model('ServiceListing', serviceSchema)
+module.exports = serviceListing;

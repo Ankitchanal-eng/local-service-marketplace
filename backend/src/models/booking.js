@@ -5,19 +5,19 @@ const bookingSchema = mongoose.Schema(
         serviceId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'serviceListing',  // References your ServiceListing model
+            ref: 'ServiceListing',  // References your ServiceListing model
         },
 
         providerId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'user',     // References your user model
+            ref: 'User',     // References your user model
         },
 
         customerId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'user',
+            ref: 'User',
         },
 
         note: {

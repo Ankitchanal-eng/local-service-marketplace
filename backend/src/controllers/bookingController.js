@@ -6,9 +6,13 @@ const createBooking = asyncHandler(async (req, res) => {
     const { serviceId, note } = req.body;
     const customerId = req.user.id;     // Comes from your 'protect' middleware (req.user)
     
+    console.log("SERVICE ID:", serviceId);
+    console.log("IS VALID ObjectId:", require('mongoose').Types.ObjectId.isValid(serviceId));
+    
     if (!serviceId) {
         res.status(400);
         throw new Error('Please include a service ID');
+        
     }
 
     // 1. Find the service to verify it exists and get the providerId
@@ -59,7 +63,19 @@ const getMyBookings = asyncHandler(async (req, res) => {
     res.status(200).json(bookings);
 });
 
+const getProviderBookings = asyncHandler(async (req, res) => {
+    const providerId = req.user.id;
+    
+    const bookings = await Booking.find({ providerId: providerId })
+        .populate('serviceId', 'title')
+        .populate('customerId', 'email name')
+        .sort({ createdAt: -1 });
+
+        res.status(200).json(bookings);
+});
+
 module.exports = {
     createBooking,
     getMyBookings,
+    getProviderBookings,
 };
