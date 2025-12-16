@@ -42,5 +42,5 @@ const serviceSchema = new mongoose.Schema({
     timestamps: true    // mongoose handle createdAt and updatedAt automatically 
 });
 
-const serviceListing = mongoose.model('ServiceListing', serviceSchema)
+const serviceListing = mongoose.model('ServiceListing', serviceSchema, 'services');
 module.exports = serviceListing;

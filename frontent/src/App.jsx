@@ -13,6 +13,7 @@ import NotFoundPage from './pages/NotFoundPage';
 // import SignupPage from './pages/SignupPage'; 
 
 import './App.css';
+import './index.css';
 
 function App() {
   return (

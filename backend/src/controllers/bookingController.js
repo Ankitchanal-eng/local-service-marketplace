@@ -74,8 +74,48 @@ const getProviderBookings = asyncHandler(async (req, res) => {
         res.status(200).json(bookings);
 });
 
+const updateBookingStatus = asyncHandler(async (req, res) => {
+    const providerId = req.user.id;
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const allowedStatuses = ['accepted', 'rejected'];
+    if (!allowedStatuses.includes(status)) {
+        res.status(400);
+        throw new Error('Invalid status value');
+    }
+
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+        res.status(404);
+        throw new Error('Booking not found');
+    }
+
+    if (booking.providerId.toString() !== providerId.toString()) {
+        res.status(403);
+        throw new Error('Not authorized to update this booking');
+    }
+
+    if (booking.status !== 'pending') {
+        res.status(400);
+        throw new Error('Booking status can no longer be changed');
+    }
+
+    booking.status = status;
+    await booking.save();
+
+    res.status(200).json({
+        _id: booking._id,
+        status: booking.status,
+        message: `Booking ${status}`,
+    });
+});
+
+
 module.exports = {
     createBooking,
     getMyBookings,
     getProviderBookings,
+    updateBookingStatus,
 };

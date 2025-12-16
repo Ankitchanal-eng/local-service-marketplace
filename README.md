@@ -23,3 +23,6 @@ Tech use: React, Node, Express, MongoDB, JWT
 - Day 6: Implemented Service Details route and page wired to GET /api/services/:id with loading and not-found states.
 - Day 7: Implemented Booking model and customer request flow from Service Details page (pending requests stored with service, provider, and customer links).
 - Day 8: Built customer "My Requests" and provider "Incoming Requests" dashboards listing bookings with service, note, status, and created date.
+- Day 9: Added provider accept/reject booking actions (PATCH status) with role/ownership validation and reflected updates on customer + provider dashboards.
+
+

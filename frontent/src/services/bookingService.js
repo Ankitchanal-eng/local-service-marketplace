@@ -11,3 +11,13 @@ export const fetchProviderRequests = async () => {
   const response = await api.get('/bookings/provider');
   return response.data;
 };
+
+// Provider: Accept / Reject booking
+export const updateBookingStatus = async (id, status) => {
+  const res = await axios.patch(
+    `/api/v1/bookings/${id}/status`,
+    { status },
+    { headers: authHeader() }
+  );
+  return res.data;
+};
