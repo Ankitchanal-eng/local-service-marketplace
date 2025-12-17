@@ -14,10 +14,11 @@ export const fetchProviderRequests = async () => {
 
 // Provider: Accept / Reject booking
 export const updateBookingStatus = async (id, status) => {
-  const res = await axios.patch(
-    `/api/v1/bookings/${id}/status`,
-    { status },
-    { headers: authHeader() }
-  );
+  const res = await api.patch(`/bookings/${id}/status`, { status });
+  return res.data;
+};
+
+export const completeBooking = async (bookingId) => {
+  const res = await api.patch(`/bookings/${bookingId}/complete`);
   return res.data;
 };

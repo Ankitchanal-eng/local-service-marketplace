@@ -112,10 +112,46 @@ const updateBookingStatus = asyncHandler(async (req, res) => {
     });
 });
 
+const completeBooking = asyncHandler(async (req, res) => {
+    const providerId = req.user.id;
+    const { id } = req.params;
+
+    // find booking
+    const booking = await Booking.findById(id);
+    
+    if(!booking) {
+        res.status(400);
+        throw new Error('Booking not found');
+    }
+
+    // ownership check (provider only)
+    if(booking.providerId.toString() !== providerId.toString()) {
+        res.status(403);
+        throw new Error('Not authorized to complete this booking');
+    }
+
+    // state validation
+    if(booking.status !== 'accepted') {
+        res.status(409);
+        throw new Error('Only accepted bookings can be completed');
+    }
+
+    // update status
+    booking.status = 'complete';
+    await booking.save();
+
+    res.status(200).json({
+        _id: booking._id,
+        status: booking.status,
+        message: 'Booking marked as completed',
+    });
+});
+
 
 module.exports = {
     createBooking,
     getMyBookings,
     getProviderBookings,
     updateBookingStatus,
+    completeBooking,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProviderRequests, updateBookingStatus } from '../services/bookingService';
+import { fetchProviderRequests, updateBookingStatus, completeBooking } from '../services/bookingService';
 import Loading from '../components/LoadingState'; 
 import Error from '../components/ErrorState';   
 import EmptyState from '../components/EmptyState'; 
@@ -42,6 +42,19 @@ const ProviderRequestsPage = () => {
   if (error) return <Error message={error} />;
   if (requests.length === 0) return <EmptyState message="No incoming requests found." />;
 
+  const handleComplete = async (id) => {
+  try {
+    await completeBooking(id);
+    setRequests(prev =>
+      prev.map(req =>
+        req._id === id ? { ...req, status: 'completed' } : req
+      )
+    );
+  } catch (err) {
+    alert(err.response?.data?.message || 'Failed to complete booking');
+  }
+};
+
   return (
     <div className="provider-requests-container">
       <h2>Incoming Requests</h2>
@@ -81,6 +94,11 @@ const ProviderRequestsPage = () => {
                   </button>
                   </>
                   </div>
+                )}
+                {req.status === 'accepted' && (
+                  <button onClick={() => handleComplete(req._id)}>
+                  Complete
+                  </button>
                 )}
               </td>
             </tr>
