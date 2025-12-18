@@ -22,3 +22,4 @@ export const completeBooking = async (bookingId) => {
   const res = await api.patch(`/bookings/${bookingId}/complete`);
   return res.data;
 };
+

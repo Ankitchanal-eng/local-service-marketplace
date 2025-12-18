@@ -25,5 +25,6 @@ Tech use: React, Node, Express, MongoDB, JWT
 - Day 8: Built customer "My Requests" and provider "Incoming Requests" dashboards listing bookings with service, note, status, and created date.
 - Day 9: Added provider accept/reject booking actions (PATCH status) with role/ownership validation and reflected updates on customer + provider dashboards.
 - Day 10: Added completed status to bookings with provider "Mark Completed" action and strict status transition validation across dashboards.
+- Day 11: Added backend request validation (services/bookings) and standardized API error response format; improved frontend form feedback.
 
 

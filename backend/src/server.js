@@ -22,6 +22,10 @@ connectDB();
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', serviceRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+const { errorHandler } = require('./middleware/errorMiddleware');
+
+app.use(errorHandler);
+
 
 app.listen(PORT, () => {
     console.log(`The server is running on port ${PORT}`);

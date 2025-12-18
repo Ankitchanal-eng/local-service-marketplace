@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 const Booking = require('../models/booking');
 const ServiceListing = require('../models/serviceListing');
@@ -5,14 +6,20 @@ const ServiceListing = require('../models/serviceListing');
 const createBooking = asyncHandler(async (req, res) => {
     const { serviceId, note } = req.body;
     const customerId = req.user.id;     // Comes from your 'protect' middleware (req.user)
-    
-    console.log("SERVICE ID:", serviceId);
-    console.log("IS VALID ObjectId:", require('mongoose').Types.ObjectId.isValid(serviceId));
-    
+
+    if (note && note.length > 200) {
+        res.status(400);
+        throw new Error('Note cannot exceed 200 characters')
+    }
+       
     if (!serviceId) {
         res.status(400);
-        throw new Error('Please include a service ID');
-        
+        throw new Error('Please include a service ID');    
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(serviceId)) {
+        res.status(400);
+        throw new Error('Invalid service ID');
     }
 
     // 1. Find the service to verify it exists and get the providerId
@@ -137,7 +144,7 @@ const completeBooking = asyncHandler(async (req, res) => {
     }
 
     // update status
-    booking.status = 'complete';
+    booking.status = 'completed';
     await booking.save();
 
     res.status(200).json({
