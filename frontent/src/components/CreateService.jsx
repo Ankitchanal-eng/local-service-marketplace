@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createService } from '../services/bookingService';
 
 const CreateService = () => {
 
@@ -44,7 +45,7 @@ const handleSubmit = async (e) => {
 
   try {
     await createService(formData);
-    alert('service created successfully');
+    console.log('service created successfully');
 
     setFormData({
       title: '',
@@ -53,7 +54,7 @@ const handleSubmit = async (e) => {
       city: '',
     });
   } catch (err) {
-    alert(err.response?.data?.message || 'Failed to create service');
+    console.error(err.response?.data?.message || 'Failed to create service');
   }
 };
   return (

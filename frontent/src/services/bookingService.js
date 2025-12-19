@@ -23,3 +23,7 @@ export const completeBooking = async (bookingId) => {
   return res.data;
 };
 
+export const createService = async (serviceData) => {
+  const res = await api.post('/services', serviceData);
+  return res.data;
+};
