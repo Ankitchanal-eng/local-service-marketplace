@@ -27,5 +27,6 @@ Tech use: React, Node, Express, MongoDB, JWT
 - Day 10: Added completed status to bookings with provider "Mark Completed" action and strict status transition validation across dashboards.
 - Day 11: Added backend request validation (services/bookings) and standardized API error response format; improved frontend form feedback.
 - Day 12: Hardened Express API security with Helmet headers, rate limiting (429), and tightened CORS + env/secrets hygiene.
+- Day 13: Polished frontend UX with consistent loading/error/empty states, improved empty-state messaging, and added a global 404 page + role-aware navigation.
 
 

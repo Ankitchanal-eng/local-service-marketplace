@@ -8,6 +8,7 @@ const CreateService = () => {
     description: '',
     category: '',
     city: '',
+    startingPrice: '',
   });
   
   console.log(formData);
@@ -95,6 +96,15 @@ const handleSubmit = async (e) => {
             name="city"
             value={formData.city}
             onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <lable>StartingPrice</lable><br />
+          <input type="text"
+          name="startingPrice"
+          value={formData.startingPrice}
+          onChange={handleChange}
           />
         </div>
 

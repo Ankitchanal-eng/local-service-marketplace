@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import MyRequestsPage from './pages/MyRequestsPage';
-import ProviderRequestsPage from './pages/ProviderRequestsPage';
-import Header from './components/Header/Header';
 import Home from './pages/Home';
-import BrowseServices from './components/BrowseServices';
+import BrowseServices from './pages/BrowseServices';
 import ServiceDetails from './pages/ServiceDetails';
-import CreateService from './components/CreateService';
+import CreateService from './pages/CreateService';
+import ProviderRequestsPage from './pages/ProviderRequestsPage';
 import NotFoundPage from './pages/NotFoundPage';
+
+import Header from './components/Header/Header';
 // import LoginPage from './pages/LoginPage'; 
 // import SignupPage from './pages/SignupPage'; 
 

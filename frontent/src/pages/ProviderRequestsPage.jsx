@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import StatusBadge from '../components/StatusBadge';
 import { fetchProviderRequests, updateBookingStatus, completeBooking } from '../services/bookingService';
+
 import Loading from '../components/LoadingState'; 
 import Error from '../components/ErrorState';   
 import EmptyState from '../components/EmptyState'; 
@@ -14,12 +16,13 @@ const ProviderRequestsPage = () => {
       try {
         const data = await fetchProviderRequests();
         setRequests(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+      } catch {
+        setError('Failed to load incoming requests. Please try again.');
+      } finally {
+        setLoading(flase);
       }
     };
+
     getRequests();
   }, []);
 
@@ -38,15 +41,11 @@ const ProviderRequestsPage = () => {
     }
   };
 
-  if (loading) return <Loading />;
-  if (error) return <Error message={error} />;
-  if (requests.length === 0) return <EmptyState message="No incoming requests found." />;
-
   const handleComplete = async (id) => {
   try {
     await completeBooking(id);
-    setRequests(prev =>
-      prev.map(req =>
+    setRequests((prev) =>
+      prev.map((req) =>
         req._id === id ? { ...req, status: 'completed' } : req
       )
     );
@@ -55,17 +54,32 @@ const ProviderRequestsPage = () => {
   }
 };
 
+if (loading) return <LoadingState />;
+
+if (error) {
   return (
-    <div className="provider-requests-container">
+    <ErrorState message={error} onRetry={() => window.location.reload()} />
+  );
+}
+
+if (requests.length === 0) {
+  return (
+    <EmptyState message={'No customers have requested your services yet,'} />
+  );
+}
+
+  return (
+    <div className="page-container provider-requests-container">
       <h2>Incoming Requests</h2>
+
       <table>
         <thead>
           <tr>
-            <th>Service Title</th>
-            <th>Customer Info</th>
+            <th>Service</th>
+            <th>Customer</th>
             <th>Note</th>
             <th>Status</th>
-            <th>Created Date</th>
+            <th>Requested On</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -73,13 +87,11 @@ const ProviderRequestsPage = () => {
           {requests.map((req) => (
             <tr key={req._id}>
               {/* Uses populated titles/emails or handles null gracefully */}
-              <td>{req.serviceId ? req.serviceId.title : 'Service Deleted/Invalid'}</td>
-              <td>{req.customerId ? (req.customerId.name || req.customerId.email) : 'User Deleted/Invalid'}</td>
+              <td>{req.serviceId ? req.serviceId.title : 'Service removed'}</td>
+              <td>{req.customerId ? (req.customerId.name || req.customerId.email) : 'User removed'}</td>
               <td>{req.note}</td>
               <td>
-                <span className={`badge ${req.status}`}>
-                  {req.status}
-                </span>
+                <StatusBadge status={req.status} />
               </td>
               <td>{new Date(req.createdAt).toLocaleDateString()}</td>
               <td>

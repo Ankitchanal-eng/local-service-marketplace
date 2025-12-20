@@ -6,7 +6,7 @@ const ServiceList = ({ services =[] }) => {
         <div>
             {services.length > 0 ? (
                 services.map(service => (
-                    <ServiceCard key={service.id} service={service} />
+                    <ServiceCard key={service._id} service={service} />
                 ))
             ) : (
                 <p>No services found matching your criteria.</p>
