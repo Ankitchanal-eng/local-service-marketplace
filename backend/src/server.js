@@ -28,6 +28,8 @@ const allowedOrigins = [
   'https://local-service-marketplace.vercel.app',
   process.env.FRONTEND_URL,
 ];
+
+const filteredOrigins = allowedOrigins.filter(origin => origin);
  
 app.use(
   cors({
