@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
+
 import '../styles/BrowseServices.css'; 
 import ServiceList from '../components/ServiceList';
 import FilterSidebar from '../components/FilterSidebar';
@@ -19,11 +20,12 @@ const BrowseServices = () => {
         setIsLoading(true);
         setError(null);
         try{
-            const response = await axios.get('/api/v1/services', {
+            const response = await api.get('/api/v1/services', {
                 params: currentFilters
             });
             setServices(response.data.data);
         } catch (err) {
+            console.error('Fetch error:', err);
             setError('Failed to fetch services. Is the backend running?');
         } finally {
             setIsLoading(false);
