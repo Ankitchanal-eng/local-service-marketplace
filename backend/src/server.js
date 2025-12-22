@@ -18,7 +18,10 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = [
+  'http://localhost:5173',
+    process.env.CLIENT_ORIGIN
+].filter(Boolean);
   
 app.use(
   cors({
@@ -29,6 +32,7 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
+        console.log('CORS blocked origin:', origin);
         return callback(new Error('Not allowed by CORS'));
       }
     },
@@ -36,7 +40,7 @@ app.use(
   })
 );
 
-app.options('/*splat', cors());
+app.options('*', cors());
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,  
