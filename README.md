@@ -1,3 +1,23 @@
+## 🚀 Run Locally
+
+### Prerequisites
+- Node.js v18+ (recommended)
+- MongoDB (local or Atlas)
+
+### Backend Setup
+bash
+cd backend
+npm install
+npm run dev 
+
+Runs on: http://localhost:5000
+
+### Backend Setup
+cd frontend
+npm install
+npm run dev
+Runs on: http://localhost:5173
+
 Project: "Local Service MarketPlace Build with MERN"
 Tech use: React, Node, Express, MongoDB, JWT
 
@@ -13,6 +33,40 @@ Tech use: React, Node, Express, MongoDB, JWT
 - 🛡️ Protected routes + input validation
 
 ## Tech Stack
+React (Vite)
+
+Node.js
+
+Express.js
+
+MongoDB
+
+JWT Authentication
+
+## 🔐 Environment Variables
+
+### Backend
+| Variable | Description |
+|--------|------------|
+| PORT | Backend server port |
+| MONGO_URL | MongoDB connection string |
+| JWT_SECRET | JWT signing secret |
+| CLIENT_ORIGIN | Allowed frontend origin |
+
+### Frontend
+| Variable | Description |
+|--------|------------|
+| VITE_API_BASE_URL | Backend API base URL |
+
+## 🌍 Deployment Plan
+
+- Backend: Render
+- Frontend: Vercel
+- MongoDB: MongoDB Atlas
+
+Frontend will communicate with backend via environment variable
+`VITE_API_BASE_URL`.
+
 
 ## Progress Log
 
