@@ -20,7 +20,7 @@ const BrowseServices = () => {
         setIsLoading(true);
         setError(null);
         try{
-            const response = await api.get('/api/v1/services', {
+            const response = await api.get('/services', {
                 params: currentFilters
             });
             setServices(response.data.data);
