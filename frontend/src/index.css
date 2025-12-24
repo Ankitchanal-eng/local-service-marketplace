@@ -4,18 +4,22 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Make table scrollable on small screens */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  overflow-x: auto;
 }
 
 th, td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #eee;
+  white-space: nowrap; /* prevent wrapping inside cells */
 }
 
 th {
@@ -53,6 +57,7 @@ th {
 .action-buttons {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap; /* wrap buttons on small screens */
 }
 
 button {
@@ -62,6 +67,7 @@ button {
   cursor: pointer;
   font-weight: 600;
   transition: opacity 0.2s;
+  font-size: 0.9rem;
 }
 
 .btn-accept {
@@ -76,4 +82,42 @@ button {
 
 button:hover {
   opacity: 0.85;
+}
+
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+@media (max-width: 768px) {
+  .provider-requests-container {
+    padding: 10px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .action-buttons {
+    gap: 4px;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  th, td {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
 }
