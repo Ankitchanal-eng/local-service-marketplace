@@ -83,5 +83,7 @@ Frontend will communicate with backend via environment variable
 - Day 12: Hardened Express API security with Helmet headers, rate limiting (429), and tightened CORS + env/secrets hygiene.
 - Day 13: Polished frontend UX with consistent loading/error/empty states, improved empty-state messaging, and added a global 404 page + role-aware navigation.
 - Days 14–15: Documented local setup & env config, wired frontend to API base URL, and deployed backend + frontend so the full booking flow works on live URLs.
+✅ Fully responsive web app deployed with sticky header, mobile menu, smooth animations, and modern UI/UX across all devices.
+
 
 
