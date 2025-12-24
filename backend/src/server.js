@@ -27,8 +27,6 @@ const allowedOrigins = [
   'http://localhost:5173',
   process.env.FRONTEND_URL,
 ];
-
-const filteredOrigins = allowedOrigins.filter(origin => origin);
  
 app.use(
   cors({
@@ -41,7 +39,7 @@ app.use(
         return callback(null, true);
       }
       
-      if (origin.endsWith('.vercel.app')) {
+      if (origin.endsWith('.netlify.app')) {
         return callback(null, true);  
       }
       else {
@@ -49,11 +47,10 @@ app.use(
       }
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
-
-
-app.options('/*splat', cors());
 
 
 const apiLimiter = rateLimit({
