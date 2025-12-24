@@ -25,7 +25,6 @@ app.use(express.json());
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://local-service-marketplace.vercel.app',
   process.env.FRONTEND_URL,
 ];
 
